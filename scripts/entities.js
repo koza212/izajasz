@@ -1,3 +1,4 @@
+
 class Entity {
     constructor(x = 0, y = 0, vx = 0, vy = 0, width = 32, height = 32) {
         this.x = x;
@@ -15,10 +16,15 @@ class Entity {
 }
 
 class Player extends Entity {
-    constructor(x, y, canvasWidth, canvasHeight) {
+    constructor(x, y, canvasWidth, canvasHeight, render) {
         super(x, y);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
+
+        this.render = render;
+
+        this.id = render.createImage("./images/player.png",this.x,this.y);
+        this.posRenderUpdate(this.id,render);
 
         this.hp = 6; 
         this.speed = 2;
@@ -59,6 +65,18 @@ class Player extends Entity {
     update() {
         super.update();
         this.checkBounds();
+    }
+
+    moveInstant(x,y){
+        this.x = x;
+        this.y = y;
+        this.posRenderUpdate(this.id,this.render);
+    }
+
+    posRenderUpdate(id){
+        console.log(id-1);
+        this.render.renderArr[id-1].x = this.x;
+        this.render.renderArr[id-1].y = this.y;
     }
 }
 
