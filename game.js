@@ -1,16 +1,15 @@
 import XOrShift from "./scripts/utils/math.js";
 import Renderer from "./rendering.js";
+import Player from "./scripts/entities.js";
 
 var GameRunning = true; 
 
-var Render = new Renderer;
+var render = new Renderer;
 
 
-    Render.render();
+    render.render();
 
-
-
-// let rng = new XOrShift(9481290);
-// for(let i = 0; i<100; i++){
-//     console.log(rng.next());
-// }
+const canvasHeight = render.getCanvasHeight();
+const canvasWidth = render.getCanvasWidth();
+const player = new Player(canvasWidth / 8, canvasHeight / 8, canvasWidth, canvasHeight);
+console.log(player);

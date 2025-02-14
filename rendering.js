@@ -28,6 +28,15 @@ class Renderer{
         }
         requestAnimationFrame(this.render); // loop
     }
+
+    getCanvasWidth(){
+        return this.canvas.width;
+    }
+    
+    getCanvasHeight(){
+        return this.canvas.height;
+    }
+
 };
 
 export default Renderer;
