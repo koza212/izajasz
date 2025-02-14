@@ -5,7 +5,10 @@ var GameRunning = true;
 
 var Render = new Renderer;
 
+
     Render.render();
+
+
 
 // let rng = new XOrShift(9481290);
 // for(let i = 0; i<100; i++){
