@@ -44,14 +44,5 @@ class Renderer{
 
 };
 
-class IMG{
-    constructor(path,x,y){
-        this.path = path;
-        this.img = new Image();
-        this.img.path = this.path;
-        this.x = x;
-        this.y = y;
-    }
-}
 
 export default Renderer;

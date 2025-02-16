@@ -16,7 +16,7 @@ class Entity {
 }
 
 class Player extends Entity {
-    constructor(x, y, canvasWidth, canvasHeight, render) {
+    constructor(x, y, canvasWidth, canvasHeight, render,map) {
         super(x, y);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
@@ -25,6 +25,11 @@ class Player extends Entity {
 
         this.id = render.createImage("./images/player.png",this.x,this.y);
         this.posRenderUpdate(this.id,render);
+
+        for(var i = 0; i < map.roomsPlaced;i++){
+            
+        }
+        this.roomCurrently = 0;
 
         this.hp = 6; 
         this.speed = 2;

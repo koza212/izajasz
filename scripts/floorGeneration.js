@@ -47,7 +47,6 @@ class FloorGenerator {
                 }
             }
         }
-
         this.adjList = this.findAdjacencyList(this.grid);
         let farthestBossRoom = null;
         let maxDistance = 0;
