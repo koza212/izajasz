@@ -74,7 +74,6 @@ class Player extends Entity {
     }
 
     posRenderUpdate(id){
-        console.log(id-1);
         this.render.renderArr[id-1].x = this.x;
         this.render.renderArr[id-1].y = this.y;
     }

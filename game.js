@@ -1,4 +1,6 @@
 import XOrShift from "./scripts/utils/math.js";
+import FloorGenerator from "./scripts/floorGeneration.js";
+
 import Renderer from "./rendering.js";
 import Player from "./scripts/entities.js";
 
@@ -10,16 +12,11 @@ var render = new Renderer;
 
 const canvasHeight = render.getCanvasHeight();
 const canvasWidth = render.getCanvasWidth();
-const player = new Player(canvasWidth / 8, canvasHeight / 8, canvasWidth, canvasHeight, render);
-console.log(player);
-player.moveInstant(300,400);
-
-player.x = 1000;
-console.log(player.x);
-console.log(render.renderArr[1]);
+//const player = new Player(canvasWidth / 8, canvasHeight / 8, canvasWidth, canvasHeight, render);
 
 
-console.log(player);
-console.log(player.id);
+let rng = new XOrShift();
+let gen = new FloorGenerator(1, rng);
+let map = gen.generateFloorMap();
+console.log(map);
 
-player.moveInstant(300,800);

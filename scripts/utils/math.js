@@ -12,6 +12,10 @@ class XOrShift{
         this.state = x;
         return (x >>> 0) / 2 ** 32;
     }
+
+    setSeed(seed){
+        this.seed = seed;
+    }
 }
 
 export default XOrShift;
