@@ -19,6 +19,8 @@ const canvasHeight = render.getCanvasHeight();
 const canvasWidth = render.getCanvasWidth();
 const player = new Player(canvasWidth / 8, canvasHeight / 8, 1, canvasWidth, canvasHeight, render,map);
 
+console.log(map);
+
 var keyGetter = new KeyGetter(render,player);
 
 player.moveInstant(700,500);

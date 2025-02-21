@@ -2,13 +2,14 @@ class Renderer{
     constructor(map){
         this.height = window.innerHeight;
         this.width = this.height * (16/9);
-        this.MapToggled = false;
-        this.map = map;
-        this.renderArr = [];
         this.canvas = document.getElementById("game");
         this.ctx = this.canvas.getContext("2d");
         this.canvas.width = this.width;
         this.canvas.height = this.height;
+
+        this.MapToggled = false;
+        this.map = map;
+        this.renderArr = [];
         this.id = 0;
 
         this.ctx.imageSmoothingEnabled = false;
@@ -23,12 +24,11 @@ class Renderer{
 
         this.finished = false;
 
-        this.interfaceSprites = 3;
+        this.interfaceSprites = 2;
 
         this.render = this.render.bind(this); // binding so in render it doesnt lose context
 
         this.createImage("./images/map/background.png");
-        this.createImage("./images/minimap/mapBackground.png", 10,10,300,300);
         this.createImage("./images/minimap/bigMapBackground.png");
     }
 
@@ -51,32 +51,81 @@ class Renderer{
     }
 
     CreateMapImages(){
-        var roomMaxLeft = 0;
+        var roomMaxLeft = this.map.length;
+        var roomMaxRight = 0;
+        var roomMaxTop = this.map.length;
+        var roomMaxBottom = 0;
         if(!this.finished){
             for(var i = 0; i < this.map.length; i++){
                 for(var j = 0; j < this.map[i].length; j++){
-                    if(this.map[j][i] !== '-'){
-                        if(roomMaxLeft < i){
-                            roomMaxLeft = i;
+                    if(this.map[i][j] != '-'){
+                        if(roomMaxLeft > j){
+                            roomMaxLeft = j;
+                        }
+                        if(roomMaxRight < j){
+                            roomMaxRight = j;
+                        }
+                        if(roomMaxTop > i){
+                            roomMaxTop = i;
+                        }
+                        if(roomMaxBottom < i){
+                            roomMaxBottom = i;
                         }
                     }
                 }   
             }
-            for(var i = 0; i < this.map.length; i++){
-                for(var j = 0; j < this.map[i].length; j++){
-                    if(this.map[j][i] !== '-'){
-                        //if(this.roomAmount == )
-                        this.roomAmount++;
-                        this.createImage("./images/minimap/room.png",-(roomMaxLeft*17) + i*45, -60+j*35, 45, 35, "smallMapRoom" ,false);
-                    }
-                }   
+            roomMaxRight++;
+
+            if(!this.MapToggled){
+                for(var i = 0; i < this.map.length; i++){
+                    for(var j = 0; j < this.map[i].length; j++){
+                        if(this.map[j][i] !== '-'){
+                            this.roomAmount++;
+                            this.createImage(
+                                "./images/minimap/room.png",
+                                -(roomMaxLeft*45) + (i * 45) + 30, 
+                                -(roomMaxTop*35) + (j * 35) + 50, 
+                                45, 
+                                35, 
+                                "smallMapRoom", 
+                                false
+                            );
+                        }
+                    }   
+                }
+            }
+            else{
+                for(var i = 0; i < this.map.length; i++){
+                    for(var j = 0; j < this.map[i].length; j++){
+                        if(this.map[j][i] !== '-'){
+                            this.roomAmount++;
+                            this.createImage(
+                                "./images/minimap/room.png",
+                                -(roomMaxLeft*45) + (i * 45) + 300, 
+                                -(roomMaxTop*35) + (j * 35) + 500, 
+                                45, 
+                                35, 
+                                "smallMapRoom", 
+                                false
+                            );
+                        }
+                    }   
+                }
             }
         }
+        console.log(this.renderArr);
         this.finished = true;
     }
 
     shouldGenMap(){
         if(!this.MapToggled){
+            for(var i = this.interfaceSprites; i < this.renderArr.length; i++){
+                if(this.renderArr[i].constans == false){
+                    this.renderArr.splice(i,1);
+                }
+            }
+            this.finished = false;
+            this.roomAmount = 0;
             this.CreateMapImages();
         }
         else{
@@ -87,6 +136,7 @@ class Renderer{
             }
             this.finished = false;
             this.roomAmount = 0;
+            this.CreateMapImages();
         }
     }
 
@@ -135,9 +185,7 @@ class Renderer{
             }
         // Rendering the smaller map if the bigger is not used
         if(!this.MapToggled){
-            this.ctx.drawImage(this.renderArr[1].image, this.renderArr[1].x, this.renderArr[1].y, this.renderArr[1].w, this.renderArr[1].h);
             this.shouldGenMap();
-    
             for(var i = this.interfaceSprites; i < this.renderArr.length; i++){
                 if(!this.renderArr[i].constans){
                     this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x, this.renderArr[i].y, this.renderArr[i].w, this.renderArr[i].h);
@@ -145,8 +193,13 @@ class Renderer{
             }
         }
         else{
-            this.ctx.drawImage(this.renderArr[2].image, 0, 0, this.width, this.height);
+            this.ctx.drawImage(this.renderArr[1].image, 0, 0, this.width, this.height);
             this.shouldGenMap();
+            for(var i = this.interfaceSprites; i < this.renderArr.length; i++){
+                if(!this.renderArr[i].constans){
+                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x, this.renderArr[i].y, this.renderArr[i].w, this.renderArr[i].h);
+                }
+            }
             // tutaj bedzie duza mapa ale teraz mi sie nie chce jej dodac ;)
         }
     }
