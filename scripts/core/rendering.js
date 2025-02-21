@@ -80,8 +80,9 @@ class Renderer{
                 this.renderMap(30,50,45,30,roomMaxLeft,roomMaxTop);
             }
             else{
-                var height = ((this.height - (roomMaxBottom*66 - roomMaxTop*66)) / 2);
-                var width = ((this.width - (roomMaxRight*100 - roomMaxLeft*100)) / 2);
+                var height = (((roomMaxBottom*66 - roomMaxTop*66)) / 2 + 260);
+                var width = (((roomMaxRight*100 - roomMaxLeft*100)) / 2 + 350);
+                console.log(width , height);
                 this.renderMap(height,width,100,66,roomMaxLeft,roomMaxTop);
             }
         }

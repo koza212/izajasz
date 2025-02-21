@@ -1,13 +1,13 @@
 import Entity from "./entity.js";
 
 class Player extends Entity {
-    constructor(x, y, moveSpeed, canvasWidth, canvasHeight, render, map) {
+    constructor(x, y, moveSpeed, canvasWidth, canvasHeight, render, map, scale) {
         super(x, y);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.moveSpeed = moveSpeed;
-
         this.render = render;
+        this.scale = scale;
 
         this.animationArr = [
 
@@ -44,6 +44,8 @@ class Player extends Entity {
         this.coins = 0;
         this.keys = 0;
         this.bombs = 0;
+
+        this.bulletsArr = [];
     }
 
     move(dir) {
@@ -79,6 +81,23 @@ class Player extends Entity {
         this.posRenderUpdate(this.realID);
     }
 
+    shooting(dir){
+        if(dir == 1){
+            var bullet = new Entity("./images/entities/ball.png",this.x, this.y, 5, 30, 30);
+            this.bulletsArr.push(bullet);
+            console.log("fired");
+        }
+        else if(dir == 2){
+            
+        }
+        else if(dir == 3){
+            
+        }
+        else if(dir == 4){
+            
+        }
+    }
+
     checkIfPlayerMoving(){
         if( this.speedX == 0 && this.speedY == 0 ){
             this.render.renderArr[this.realID-1].currentState = 0;
@@ -87,8 +106,8 @@ class Player extends Entity {
     }
 
     checkBounds() {
-        this.x = Math.max(0, Math.min(this.canvasWidth - this.width, this.x));
-        this.y = Math.max(0, Math.min(this.canvasHeight - this.height, this.y));
+        this.x = Math.max(200, Math.min(1580, this.x));
+        this.y = Math.max(100, Math.min(750, this.y));
     }
 
     takeDamage(amount) {

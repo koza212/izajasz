@@ -1,6 +1,7 @@
 
 class Entity {
-    constructor(x = 0, y = 0,moveSpeed = 1, width = 32, height = 32) {
+    constructor(path ,x = 0, y = 0,moveSpeed = 1, width = 32, height = 32) {
+        this.path = path;
         this.x = x;
         this.y = y;
         this.speedX = 0;
@@ -32,3 +33,5 @@ class Entity {
         this.checkIfPlayerMoving();
     }
 }
+
+export default Entity

@@ -19,7 +19,12 @@ class Game {
     this.gen = new FloorGenerator(1, this.rng);
     this.map = this.gen.generateFloorMap();
 
-    this.render = new Renderer(this.map);
+    var height = window.innerHeight;
+    var width = height * (16/9);
+
+    var scale = height / 1080;
+
+    this.render = new Renderer(this.map,width,height,scale);
     this.render.render();
 
     this.canvasHeight = this.render.getCanvasHeight();
@@ -32,7 +37,8 @@ class Game {
       this.canvasWidth,
       this.canvasHeight,
       this.render,
-      this.map
+      this.map,
+      scale
     );
 
     this.keyGetter = new KeyGetter(this.render, this.player);
@@ -43,6 +49,7 @@ class Game {
     setInterval(() => {
       this.render.render();
       this.player.update();
+      this.keyGetter.shootCooldown();
     }, 1000 / this.FPS);
   }
 }
