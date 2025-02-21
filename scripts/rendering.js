@@ -1,7 +1,8 @@
 class Renderer{
-    constructor(map){
-        this.height = window.innerHeight;
-        this.width = this.height * (16/9);
+    constructor(map,width, height, scale){
+        this.height = height;
+        this.width = width;
+        this.scale = scale;
         this.canvas = document.getElementById("game");
         this.ctx = this.canvas.getContext("2d");
         this.canvas.width = this.width;
@@ -75,46 +76,35 @@ class Renderer{
                 }   
             }
             roomMaxRight++;
-
             if(!this.MapToggled){
-                for(var i = 0; i < this.map.length; i++){
-                    for(var j = 0; j < this.map[i].length; j++){
-                        if(this.map[j][i] !== '-'){
-                            this.roomAmount++;
-                            this.createImage(
-                                "./images/minimap/room.png",
-                                -(roomMaxLeft*45) + (i * 45) + 30, 
-                                -(roomMaxTop*35) + (j * 35) + 50, 
-                                45, 
-                                35, 
-                                "smallMapRoom", 
-                                false
-                            );
-                        }
-                    }   
-                }
+                this.renderMap(30,50,45,30,roomMaxLeft,roomMaxTop);
             }
             else{
-                for(var i = 0; i < this.map.length; i++){
-                    for(var j = 0; j < this.map[i].length; j++){
-                        if(this.map[j][i] !== '-'){
-                            this.roomAmount++;
-                            this.createImage(
-                                "./images/minimap/room.png",
-                                -(roomMaxLeft*45) + (i * 45) + 300, 
-                                -(roomMaxTop*35) + (j * 35) + 500, 
-                                45, 
-                                35, 
-                                "smallMapRoom", 
-                                false
-                            );
-                        }
-                    }   
-                }
+                var height = ((this.height - (roomMaxBottom*66 - roomMaxTop*66)) / 2);
+                var width = ((this.width - (roomMaxRight*100 - roomMaxLeft*100)) / 2);
+                this.renderMap(height,width,100,66,roomMaxLeft,roomMaxTop);
             }
         }
-        console.log(this.renderArr);
         this.finished = true;
+    }
+
+    renderMap(marginTop,marginRow,width,height,roomMaxLeft,roomMaxTop){
+        for(var i = 0; i < this.map.length; i++){
+            for(var j = 0; j < this.map[i].length; j++){
+                if(this.map[j][i] !== '-'){
+                    this.roomAmount++;
+                    this.createImage(
+                        "./images/minimap/room.png",
+                        -(roomMaxLeft*width) + (i * width) + marginRow, 
+                        -(roomMaxTop*height) + (j * height) + marginTop, 
+                        width, 
+                        height, 
+                        "smallMapRoom", 
+                        false
+                    );
+                }
+            }   
+        }
     }
 
     shouldGenMap(){
@@ -172,15 +162,15 @@ class Renderer{
                     , (this.renderArr[i].animationArr[this.renderArr[i].currentState][5])
                     , (this.renderArr[i].animationArr[this.renderArr[i].currentState][2])
                     , (this.renderArr[i].animationArr[this.renderArr[i].currentState][3])
-                    , this.renderArr[i].x
-                    , this.renderArr[i].y
-                    , this.renderArr[i].w
-                    , this.renderArr[i].h);
+                    , this.renderArr[i].x * this.scale
+                    , this.renderArr[i].y * this.scale
+                    , this.renderArr[i].w * this.scale
+                    , this.renderArr[i].h * this.scale);
                     }
                     
                 }
                 else{
-                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x, this.renderArr[i].y, this.renderArr[i].w, this.renderArr[i].h);
+                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x * this.scale, this.renderArr[i].y * this.scale, this.renderArr[i].w * this.scale, this.renderArr[i].h * this.scale);
                 }
             }
         // Rendering the smaller map if the bigger is not used
@@ -188,7 +178,7 @@ class Renderer{
             this.shouldGenMap();
             for(var i = this.interfaceSprites; i < this.renderArr.length; i++){
                 if(!this.renderArr[i].constans){
-                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x, this.renderArr[i].y, this.renderArr[i].w, this.renderArr[i].h);
+                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x * this.scale, this.renderArr[i].y * this.scale, this.renderArr[i].w * this.scale, this.renderArr[i].h * this.scale);
                 }
             }
         }
@@ -197,7 +187,7 @@ class Renderer{
             this.shouldGenMap();
             for(var i = this.interfaceSprites; i < this.renderArr.length; i++){
                 if(!this.renderArr[i].constans){
-                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x, this.renderArr[i].y, this.renderArr[i].w, this.renderArr[i].h);
+                    this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x * this.scale, this.renderArr[i].y * this.scale, this.renderArr[i].w * this.scale, this.renderArr[i].h * this.scale);
                 }
             }
             // tutaj bedzie duza mapa ale teraz mi sie nie chce jej dodac ;)

@@ -29,7 +29,6 @@ class Entity {
         }
         this.updateID();
         this.posRenderUpdate(this.realID);
-        console.log(this.id);
         this.checkIfPlayerMoving();
     }
 }
@@ -57,6 +56,7 @@ class Player extends Entity {
         ];
 
         this.id = render.createImage("./images/entities/player.png", this.x, this.y, 150, 150,"player", true, this.animationArr, 0);
+        this.shadowID = render.createImage("./images/entities/shadow.png", this.x, (this.y - 20), 150, 150,"shadow", true);
         this.updateID();
         this.posRenderUpdate(this.realID);
 
@@ -82,27 +82,31 @@ class Player extends Entity {
     move(dir) {
         if(dir == 1){
             if(this.speedX < 10){
-                this.speedX = (this.speedX + 3);
+                this.speedX = (this.speedX + 2);
                 this.render.renderArr[this.realID-1].currentState = 4;
             }
 
         }
         else if(dir == 2){
             if(this.speedY > (-10)){
-                this.speedY = (this.speedY - 3);
-                this.render.renderArr[this.realID-1].currentState = 2;
+                this.speedY = (this.speedY - 2);
+                if( this.speedX == 0){
+                    this.render.renderArr[this.realID-1].currentState = 2;
+                }
             }
         }
         else if(dir == 3){
             if(this.speedX > (-10)){
-                this.speedX = (this.speedX - 3);
+                this.speedX = (this.speedX - 2);
                 this.render.renderArr[this.realID-1].currentState = 3;  
             }
         }
         else if(dir == 4){
             if(this.speedY < 10){
-                this.speedY = (this.speedY + 3);
-                this.render.renderArr[this.realID-1].currentState = 1;
+                this.speedY = (this.speedY + 2);
+                if( this.speedX == 0){
+                    this.render.renderArr[this.realID-1].currentState = 1;
+                }
             }
         }
         this.posRenderUpdate(this.realID);
