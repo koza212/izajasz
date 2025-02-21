@@ -8,3 +8,13 @@ body{
     width: 100%;
     height: 100%;
 }
+.all{
+    justify-items: center;
+    align-items: center;
+    background-color: black;
+}
+#game{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
