@@ -21,32 +21,35 @@ class FloorGenerator {
         ];
 
         let roomsPlaced = 0;
-        outerWhile:
-        while (roomsPlaced < this.roomCount) {
-            let visited = [];
-            this.fillGrid(this.gridSize, false, visited);
-            let queue = [{ x: startX, y: startY }];
+        let visited = [];
+        this.fillGrid(this.gridSize, false, visited);
+        let queue = [{ x: startX, y: startY }];
+        while (queue.length !== 0) {
+            this.shuffleArray(directions);
+            let { x, y } = queue.shift();
+            if (visited[x][y]) continue;
+            visited[x][y] = true;
+            for (const [directionX, directionY] of directions) {
+                let newX = directionX + x, newY = directionY + y;
+                if ((newX < 0 || newX >= this.gridSize) || (newY < 0 || newY >= this.gridSize)) continue;
+                if (visited[newX][newY] || this.grid[newX][newY] != '-') continue;
 
-            while (queue.length !== 0) {
-                let { x, y } = queue.shift();
-                if (visited[x][y]) continue;
-                visited[x][y] = true;
-                for (const [directionX, directionY] of directions) {
-                    let newX = directionX + x, newY = directionY + y;
-                    if ((newX < 0 || newX >= this.gridSize) || (newY < 0 || newY >= this.gridSize)) continue;
-                    if (visited[newX][newY] || this.grid[newX][newY] != '-') continue;
-
-                    // Rng gives num between 0 and 1 so there is 75% odds that number will be lower and we will build room in the place
-                    let odds = 0.75;
-                    if (this.rng.next() < odds) {
-                        roomsPlaced += 1;
-                        if (roomsPlaced > this.roomCount) break outerWhile;
-                        this.grid[newX][newY] = "Room";
-                        queue.push({ x: newX, y: newY });
-                    }
+                let neighborCount = 0;
+                for(const [dirX, dirY] of directions){
+                    let neighborX = dirX + newX, neighborY = dirY + newY;
+                    if((neighborX < 0 || neighborX > this.gridSize) || (neighborY < 0 || neighborY > this.gridSize)) continue;
+                    if(this.grid[neighborX][neighborY] != '-') neighborCount += 1;
+                }
+                if (neighborCount <= 1 && this.rng.next() < 0.5) {
+                    roomsPlaced += 1;
+                    if (roomsPlaced > this.roomCount) break;
+                    this.grid[newX][newY] = "Room";
+                    queue.push({ x: newX, y: newY });
                 }
             }
         }
+        if(roomsPlaced < this.roomCount) return this.generateFloorMap(startX, startY);
+
         this.adjList = this.findAdjacencyList(this.grid);
         let farthestBossRoom = null;
         let maxDistance = 0;
