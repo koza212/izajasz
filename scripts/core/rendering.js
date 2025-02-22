@@ -29,8 +29,8 @@ class Renderer{
 
         this.render = this.render.bind(this); // binding so in render it doesnt lose context
 
-        this.createImage("./images/map/background.png");
-        this.createImage("./images/minimap/bigMapBackground.png");
+        this.createImage("./assets/images/map/background.png");
+        this.createImage("./assets/images/minimap/bigMapBackground.png");
     }
 
     // animationArr should have: time for switching, animationFrames, frameWidth, frameHeight, framesInRow, height
@@ -95,7 +95,7 @@ class Renderer{
                 if(this.map[j][i] !== '-'){
                     this.roomAmount++;
                     this.createImage(
-                        "./images/minimap/room.png",
+                        "./assets/images/minimap/room.png",
                         -(roomMaxLeft*width) + (i * width) + marginRow, 
                         -(roomMaxTop*height) + (j * height) + marginTop, 
                         width, 

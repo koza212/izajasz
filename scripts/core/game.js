@@ -1,5 +1,6 @@
 // Rooms
 import FloorGenerator from "../rooms/floorGeneration.js";
+import RoomGenerator from "../rooms/roomGeneration.js";
 
 // Entities
 import Player from "../entities/player.js";
@@ -15,9 +16,20 @@ class Game {
   constructor() {
     this.FPS = 60;
     this.rng = new XOrShift();
+
+    this.floorNum = 1;
+    this.gen = new FloorGenerator(this.floorNum, this.rng);
+    const startX = 6, startY = 6;
+    this.map = this.gen.generateFloorMap(startX, startY);
+
+    this.currentRoomX = startX;
+    this.currentRoomY = startY;
+    this.currentRoom = this.map[this.currentRoomX][this.currentRoomY];
+    this.roomGen = new RoomGenerator(this.floorNum, this.rng);
+    this.roomGen.loadRoomLayouts().then(() =>{
+      console.log(this.roomGen.getNextRoom());
+    })
     
-    this.gen = new FloorGenerator(1, this.rng);
-    this.map = this.gen.generateFloorMap();
 
     var height = window.innerHeight;
     var width = height * (16/9);

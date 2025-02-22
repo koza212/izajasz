@@ -22,8 +22,8 @@ class Player extends Entity {
 
         ];
 
-        this.id = render.createImage("./images/entities/player.png", this.x, this.y, 150, 150,"player", true, this.animationArr, 0);
-        this.shadowID = render.createImage("./images/entities/shadow.png", this.x, (this.y - 20), 150, 150,"shadow", true);
+        this.id = render.createImage("./assets/images/entities/player.png", this.x, this.y, 150, 150,"player", true, this.animationArr, 0);
+        this.shadowID = render.createImage("./assets/images/entities/shadow.png", this.x, (this.y - 20), 150, 150,"shadow", true);
         this.updateID();
         this.posRenderUpdate(this.realID);
 

@@ -1,0 +1,110 @@
+{
+    "rooms": [
+      {
+        "entities": [
+          { "type": "enemy", "x": 3, "y": 2 },
+          { "type": "enemy", "x": 5, "y": 5 },
+          { "type": "enemy", "x": 7, "y": 3 },
+          { "type": "obstacle", "x": 2, "y": 2 },
+          { "type": "obstacle", "x": 4, "y": 2 },
+          { "type": "obstacle", "x": 6, "y": 4 },
+          { "type": "obstacle", "x": 3, "y": 6 },
+          { "type": "pickup", "subtype": "random", "x": 5, "y": 2 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 2, "y": 3 },
+          { "type": "enemy", "x": 6, "y": 4 },
+          { "type": "enemy", "x": 5, "y": 6 },
+          { "type": "obstacle", "x": 1, "y": 2 },
+          { "type": "obstacle", "x": 4, "y": 5 },
+          { "type": "obstacle", "x": 7, "y": 3 },
+          { "type": "pickup", "subtype": "random", "x": 2, "y": 6 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 3, "y": 3 },
+          { "type": "enemy", "x": 6, "y": 2 },
+          { "type": "enemy", "x": 5, "y": 4 },
+          { "type": "obstacle", "x": 1, "y": 5 },
+          { "type": "obstacle", "x": 4, "y": 1 },
+          { "type": "obstacle", "x": 7, "y": 6 },
+          { "type": "pickup", "subtype": "random", "x": 3, "y": 7 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 5, "y": 5 },
+          { "type": "enemy", "x": 2, "y": 6 },
+          { "type": "enemy", "x": 6, "y": 3 },
+          { "type": "obstacle", "x": 3, "y": 1 },
+          { "type": "obstacle", "x": 7, "y": 2 },
+          { "type": "obstacle", "x": 5, "y": 6 },
+          { "type": "pickup", "subtype": "random", "x": 4, "y": 3 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 2, "y": 2 },
+          { "type": "enemy", "x": 4, "y": 4 },
+          { "type": "enemy", "x": 7, "y": 5 },
+          { "type": "obstacle", "x": 3, "y": 3 },
+          { "type": "obstacle", "x": 5, "y": 2 },
+          { "type": "pickup", "subtype": "random", "x": 3, "y": 6 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 4, "y": 3 },
+          { "type": "enemy", "x": 6, "y": 5 },
+          { "type": "enemy", "x": 2, "y": 7 },
+          { "type": "obstacle", "x": 3, "y": 4 },
+          { "type": "obstacle", "x": 5, "y": 6 },
+          { "type": "pickup", "subtype": "random", "x": 7, "y": 2 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 5, "y": 4 },
+          { "type": "enemy", "x": 7, "y": 2 },
+          { "type": "enemy", "x": 3, "y": 6 },
+          { "type": "obstacle", "x": 4, "y": 5 },
+          { "type": "obstacle", "x": 2, "y": 3 },
+          { "type": "pickup", "subtype": "random", "x": 6, "y": 1 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 3, "y": 5 },
+          { "type": "enemy", "x": 5, "y": 2 },
+          { "type": "enemy", "x": 7, "y": 4 },
+          { "type": "obstacle", "x": 6, "y": 3 },
+          { "type": "obstacle", "x": 2, "y": 6 },
+          { "type": "pickup", "subtype": "random", "x": 4, "y": 1 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 4, "y": 6 },
+          { "type": "enemy", "x": 7, "y": 3 },
+          { "type": "enemy", "x": 2, "y": 5 },
+          { "type": "obstacle", "x": 3, "y": 4 },
+          { "type": "obstacle", "x": 5, "y": 1 },
+          { "type": "pickup", "subtype": "random", "x": 6, "y": 2 }
+        ]
+      },
+      {
+        "entities": [
+          { "type": "enemy", "x": 6, "y": 3 },
+          { "type": "enemy", "x": 2, "y": 1 },
+          { "type": "enemy", "x": 5, "y": 4 },
+          { "type": "obstacle", "x": 3, "y": 2 },
+          { "type": "obstacle", "x": 7, "y": 5 },
+          { "type": "pickup", "subtype": "random", "x": 4, "y": 7 }
+        ]
+      }
+    ]
+  }
+  
