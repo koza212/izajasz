@@ -32,8 +32,9 @@ class Player extends Entity {
         }
         this.roomCurrently = 0;
 
+        this.maxhp=6;
         this.hp = 6; 
-        this.speed = 2;
+        this.speed = 1;
         this.damage = 3.5;
         this.fireRate = 1; 
         this.range = 100;
