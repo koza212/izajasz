@@ -1,13 +1,23 @@
 import Entity from "./entity.js";
 
+class Position{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
+};
+
 class Player extends Entity {
-    constructor(x, y, moveSpeed, canvasWidth, canvasHeight, render, map, scale) {
+    constructor(x, y, moveSpeed, canvasWidth, canvasHeight, render, map, scale, adjList) {
         super(x, y);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.moveSpeed = moveSpeed;
         this.render = render;
         this.scale = scale;
+        this.adjList = adjList;
+
+        this.posRoom = new Position(6,6);
 
         this.animationArr = [
 
@@ -126,6 +136,9 @@ class Player extends Entity {
     update() {
         super.update();
         this.checkBounds();
+        console.log(this.posRoom);
+        console.log(this.adjList);
+
     }
 
     moveInstant(x,y){
@@ -146,6 +159,51 @@ class Player extends Entity {
         this.render.renderArr[id-1].x = this.x;
         this.render.renderArr[id-1].y = this.y;
     }
+
+    // das volk das sind wir
+
+    checkForDoors(){
+        if(this.x < 230 && (this.y > 380 && this.y < 530)){
+            console.log("left door");
+            var key = `${this.posRoom.x},${this.posRoom.y-1}`;
+            if(this.adjList.has(key)){
+                this.posRoom.y -= 1;
+                console.log("succesfully used left door");
+                this.x = 1430;
+            }
+        }
+        else if(this.x > 1540 && (this.y > 380 && this.y < 530)){
+            console.log("right door");
+            var key = `${this.posRoom.x},${this.posRoom.y+1}`;
+            if(this.adjList.has(key)){
+                this.posRoom.y += 1;
+                console.log("succesfully used right door");
+                this.x = 270;
+            }
+        }
+        else if(this.y < 160 && (this.x > 850 && this.x < 970)){
+            console.log("top door");
+            var key = `${this.posRoom.x-1},${this.posRoom.y}`;
+            if(this.adjList.has(key)){
+                this.posRoom.x -= 1;
+                console.log("succesfully used top door");
+                this.y = 740;
+            }
+        }
+        else if(this.y > 740 && (this.x > 850 && this.x < 970)){
+            console.log("bottom door");
+            var key = `${this.posRoom.x+1},${this.posRoom.y}`;
+            if(this.adjList.has(key)){
+                this.posRoom.x += 1;
+                console.log("succesfully used bottom door");
+                this.y = 170;
+            }
+        }
+    }
+
+
+
+
 }
 
 export default Player;

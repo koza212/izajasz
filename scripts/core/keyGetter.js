@@ -47,6 +47,10 @@ class KeyGetter {
                 this.player.move(1);
                 console.log("d");
             }
+            if(keysPressed["e"]){
+                this.player.checkForDoors();
+            }
+
             if (keysPressed["ArrowUp"]) {
                 if(this.fireCooldown == 0){
                     this.fireCooldown = this.shootingChangableCooldown;

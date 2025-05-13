@@ -29,7 +29,7 @@ class Game {
     this.roomGen.loadRoomLayouts().then(() =>{
       console.log(this.roomGen.getNextRoom());
     })
-    
+    console.log(this.gen.grid);
 
     var height = window.innerHeight;
     var width = height * (16/9);
@@ -50,7 +50,8 @@ class Game {
       this.canvasHeight,
       this.render,
       this.map,
-      scale
+      scale,
+      this.gen.adjList
     );
 
     this.keyGetter = new KeyGetter(this.render, this.player);

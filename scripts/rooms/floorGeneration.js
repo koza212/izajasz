@@ -50,7 +50,7 @@ class FloorGenerator {
         }
         if(roomsPlaced < this.roomCount) return this.generateFloorMap(startX, startY);
 
-        this.adjList = this.findAdjacencyList(this.grid);
+        this.adjList = this.findAdjacencyList();
         let farthestBossRoom = null;
         let maxDistance = 0;
 
@@ -99,7 +99,7 @@ class FloorGenerator {
         return i === specialRooms.length;
     }
 
-    findAdjacencyList(grid) {
+    findAdjacencyList() {
         let visited = [];
         this.fillGrid(this.gridSize, false, visited);
         const directions = [[0, 1], [-1, 0], [0, -1], [1, 0]];
@@ -120,7 +120,7 @@ class FloorGenerator {
                 let newX = x + directionX, newY = y + directionY;
                 if (newX < 0 || newX >= this.gridSize || newY < 0 || newY >= this.gridSize) continue;
                 if (visited[newX][newY]) continue;
-                if (grid[newX][newY] == '-') continue;
+                if (this.grid[newX][newY] == '-') continue;
 
                 let neighborKey = `${newX},${newY}`;
                 if (!adjList.has(neighborKey)) {
