@@ -16,6 +16,7 @@ class Player extends Entity {
         this.render = render;
         this.scale = scale;
         this.adjList = adjList;
+        this.finished = false;
 
         this.posRoom = new Position(6,6);
 
@@ -37,26 +38,11 @@ class Player extends Entity {
         this.updateID();
         this.posRenderUpdate(this.realID);
 
-        for(var i = 0; i < map.roomsPlaced;i++){
-            
-        }
         this.roomCurrently = 0;
 
-        this.maxhp=6;
-        this.hp = 6; 
-        this.speed = 1;
-        this.damage = 3.5;
-        this.fireRate = 1; 
-        this.range = 100;
-        this.shotSpeed = 4;
-        this.luck = 0;
-
-        this.items = [];
+        this.hp = 3; 
         this.coins = 0;
-        this.keys = 0;
-        this.bombs = 0;
-
-        this.bulletsArr = [];
+        this.speed = 1;
     }
 
     move(dir) {
@@ -92,21 +78,12 @@ class Player extends Entity {
         this.posRenderUpdate(this.realID);
     }
 
-    shooting(dir){
-        if(dir == 1){
-            var bullet = new Entity("./images/entities/ball.png",this.x, this.y, 5, 30, 30);
-            this.bulletsArr.push(bullet);
-            console.log("fired");
-        }
-        else if(dir == 2){
-            
-        }
-        else if(dir == 3){
-            
-        }
-        else if(dir == 4){
-            
-        }
+    gainCoin(){
+        this.coins += 1;
+    }
+
+    takeDamage() {
+        this.hp -= 1;
     }
 
     checkIfPlayerMoving(){
@@ -121,30 +98,9 @@ class Player extends Entity {
         this.y = Math.max(100, Math.min(750, this.y));
     }
 
-    takeDamage(amount) {
-        this.hp = Math.max(0, this.hp - amount);
-    }
-
-    heal(amount) {
-        this.hp = Math.min(12, this.hp + amount); 
-    }
-
-    addItem(item) {
-        this.items.push(item);
-    }
-
     update() {
         super.update();
         this.checkBounds();
-        console.log(this.posRoom);
-        console.log(this.adjList);
-
-    }
-
-    moveInstant(x,y){
-        this.x = x;
-        this.y = y;
-        this.posRenderUpdate(this.realID);
     }
 
     updateID(){

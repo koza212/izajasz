@@ -22,13 +22,6 @@ class KeyGetter {
         this.fireCooldown = 0;
     }
 
-    shootCooldown(){
-        if(this.fireCooldown > 0){
-            this.fireCooldown--;
-            console.log(this.fireCooldown);
-        }
-    }
-
     movementKeys() {
         const update = () => {
             if (keysPressed["w"]) {
@@ -51,34 +44,6 @@ class KeyGetter {
                 this.player.checkForDoors();
             }
 
-            if (keysPressed["ArrowUp"]) {
-                if(this.fireCooldown == 0){
-                    this.fireCooldown = this.shootingChangableCooldown;
-                    this.player.shooting(1);
-                }
-                console.log("ArrowUp");
-            }
-            if (keysPressed["ArrowLeft"]) {
-                if(this.fireCooldown == 0){
-                    this.fireCooldown = this.shootingChangableCooldown;
-                    this.player.shooting(2);
-                }
-                console.log("ArrowLeft");
-            }
-            if (keysPressed["ArrowDown"]) {
-                if(this.fireCooldown == 0){
-                    this.fireCooldown = this.shootingChangableCooldown;
-                    this.player.shooting(3);
-                }
-                console.log("ArrowDown");
-            }
-            if (keysPressed["ArrowRight"]) {
-                if(this.fireCooldown == 0){
-                    this.fireCooldown = this.shootingChangableCooldown;
-                    this.player.shooting(4);
-                }
-                console.log("ArrowRight");
-            }
             requestAnimationFrame(update);
         };
 

@@ -13,6 +13,9 @@ class Renderer{
         this.renderArr = [];
         this.id = 0;
 
+        this.roomWidth = 1800;
+        this.roomHeight = 1200; 
+
         this.ctx.imageSmoothingEnabled = false;
         this.ctx.mozImageSmoothingEnabled = false;
         this.ctx.webkitImageSmoothingEnabled = false;
@@ -49,6 +52,21 @@ class Renderer{
             this.renderArr.push({image: img, x, y, w, h, type, constans, id});  // w = width | h = height
         }
         return this.id;
+    }
+    
+    drawCoin(x, y, scale) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.fillStyle = "gold";
+        ctx.beginPath();
+        ctx.arc(
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            40 * scale, 
+            0, 2 * Math.PI
+        );
+        ctx.fill();
+        ctx.restore();
     }
 
     CreateMapImages(){
@@ -193,6 +211,24 @@ class Renderer{
             }
             // tutaj bedzie duza mapa ale teraz mi sie nie chce jej dodac ;)
         }
+    }
+
+    drawPlayerStats(players) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.font = "20px Arial";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "top";
+        let x = this.canvas.width - 20;
+        let y = 20;
+        players.forEach((player, idx) => {
+            ctx.fillStyle = player.finished ? "#888" : "#222";
+            ctx.fillText(
+                `P${idx+1}: HP ${player.hp} | Coins ${player.coins}`,
+                x, y + idx * 28
+            );
+        });
+        ctx.restore();
     }
 
     getCanvasWidth(){

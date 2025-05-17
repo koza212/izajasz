@@ -47,18 +47,6 @@ class RoomGenerator{
         return room;
     }
 
-    getRandomPickupType() {
-        const randomValue = this.rng.next();
-        if (randomValue < 0.6) {
-            return "coin"; 
-        } else if (randomValue < 0.8) {
-            return "key"; 
-        } else {
-            return "bomb"; 
-        }
-    }
-
-
 }
 
 export default RoomGenerator;
