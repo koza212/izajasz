@@ -33,5 +33,3 @@ class Entity {
         this.checkIfPlayerMoving();
     }
 }
-
-export default Entity

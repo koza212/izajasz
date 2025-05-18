@@ -17,5 +17,3 @@ class XOrShift{
         this.seed = seed;
     }
 }
-
-export default XOrShift;

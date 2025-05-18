@@ -1,5 +1,3 @@
-import Entity from "./entity.js";
-
 class Position{
     constructor(x, y){
         this.x = x;
@@ -161,5 +159,3 @@ class Player extends Entity {
 
 
 }
-
-export default Player;

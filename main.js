@@ -1,4 +1,4 @@
-import Game from "./scripts/core/game.js";
-
-let game = new Game();
-game.start();
+window.onload = function() {
+    var game = new Game();
+    game.start();
+};

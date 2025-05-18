@@ -147,5 +147,3 @@ class FloorGenerator {
         }
     }
 }
-
-export default FloorGenerator;

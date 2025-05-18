@@ -1,18 +1,3 @@
-// Rooms
-import FloorGenerator from "../rooms/floorGeneration.js";
-import RoomGenerator from "../rooms/roomGeneration.js";
-
-// Entities
-import Player from "../entities/player.js";
-
-// Core
-import Renderer from "./rendering.js";
-import KeyGetter from "./keyGetter.js";
-
-// Utils
-import XOrShift from "../utils/math.js";
-import { prepareQuestions, showQuizModal } from "./question.js"; // Add this import
-
 class Game {
   constructor() {
     this.FPS = 60;
@@ -26,9 +11,6 @@ class Game {
     this.currentRoomX = startX;
     this.currentRoomY = startY;
     this.currentRoom = this.map[this.currentRoomX][this.currentRoomY];
-    this.roomGen = new RoomGenerator(this.floorNum, this.rng);
-
-    this.roomGen.loadRoomLayouts();
 
     var height = window.innerHeight;
     var width = height * (16/9);
@@ -160,5 +142,3 @@ class Game {
     }, 1000 / this.FPS);
   }
 }
-
-export default Game;

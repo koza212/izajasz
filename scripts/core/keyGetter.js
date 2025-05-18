@@ -62,5 +62,3 @@ class KeyGetter {
         }
     }
 };
-
-export default KeyGetter;

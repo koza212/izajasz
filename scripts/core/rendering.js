@@ -19,7 +19,7 @@ class Renderer{
         this.ctx.imageSmoothingEnabled = false;
         this.ctx.mozImageSmoothingEnabled = false;
         this.ctx.webkitImageSmoothingEnabled = false;
-        this.ctx.msImageSmoothingEnabled = false;
+        this.ctx.msImageSmoothingEnabled = false; 
 
         this.x = 0;  
 
@@ -240,6 +240,3 @@ class Renderer{
     }
 
 };
-
-
-export default Renderer;
