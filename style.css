@@ -1,21 +1,110 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-    overflow-y: hidden;
+/* Reset podstawowy */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body{
-    width: 100%;
-    height: 100%;
-    background-color: black;
-}
-.all{
-    justify-items: center;
-    align-items: center;
-    background-color: black;
-}
-#game{
+
+/* Styl całej strony */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    height: 100vh;
     display: flex;
-    justify-items: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+/* Logo i nagłówek */
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.logo img {
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+/* Sekcja z przyciskami */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Styl przycisków */
+.btn {
+    border: 2px solid rgb(233, 233, 233);
+    background-color: #1e90ff;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    user-select: none;
+}
+
+.btn:hover {
+    background-color: #3aa0ff;
+    transform: scale(1.05);
+}
+
+.btn:active {
+    transform: scale(0.95);
+    background-color: #007acc;
+}
+
+.glass-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px 60px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Settings section */
+.settings-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.settings-section label {
+    margin-bottom: 10px;
+}
+
+.select-dropdown {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.select-dropdown option {
+    background-color: #1e1e2f;
+    color: white;
 }
