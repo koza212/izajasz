@@ -173,19 +173,19 @@ class Renderer{
 
         if(this.adjList.has(key)){
             var arr = this.adjList.get(key);
+            console.log(arr);
             arr.forEach(element => {
-                var x = parseInt(element.substring(0,1));
-                var y = parseInt(element.substring(2,3));
-                if(x == currentRoomX && y < currentRoomY){
+                var coords = element.split(",");
+                if(coords[0] == currentRoomX && coords[1] < currentRoomY){
                     this.ctx.drawImage(this.renderArr[3].image, 50, 350, 140, 250);
                 }
-                else if(x == currentRoomX && y > currentRoomY){
+                if(coords[0] == currentRoomX && coords[1] > currentRoomY){
                     this.ctx.drawImage(this.renderArr[4].image, 1530, 350, 140, 250);
                 }
-                else if(x > currentRoomX && y == currentRoomY){
+                if(coords[0] > currentRoomX && coords[1] == currentRoomY){
                     this.ctx.drawImage(this.renderArr[5].image, 700, 805, 250, 107);
                 }
-                else if(x < currentRoomX && y == currentRoomY){
+                if(coords[0] < currentRoomX && coords[1] == currentRoomY){
                     this.ctx.drawImage(this.renderArr[2].image, 700, 50, 250, 120);
                 }
             });
@@ -204,7 +204,6 @@ class Renderer{
                         
                     if( this.x < this.renderArr[i].animationArr[this.renderArr[i].currentState][1]-1){
                         this.renderArr[i].delay++;
-                        console.log(this.renderArr[i].delay, this.renderArr[i]);
                         if(this.renderArr[i].delay > this.renderArr[i].animationArr[this.renderArr[i].currentState][0]){
                             this.x++;
                             this.renderArr[i].delay = 0;
