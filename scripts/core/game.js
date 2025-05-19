@@ -16,7 +16,7 @@ class Game {
     var width = height * (16/9);
     var scale = height / 1080;
 
-    this.render = new Renderer(this.map, width, height, scale, this.gen.adjList);
+    this.render = new Renderer(this.map, width, height, scale, this.gen.adjList, this.gen.randRooms);
     this.render.render();
 
     this.canvasHeight = this.render.getCanvasHeight();

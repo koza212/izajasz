@@ -91,6 +91,7 @@ class Player extends Entity {
     update() {
         super.update();
         this.checkBounds();
+        this.checkForDoors();
     }
 
     updateID(){
