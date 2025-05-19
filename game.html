@@ -35,6 +35,20 @@
     <div class="player-stats" id="player-stats"></div>
     <audio id="quizSoundGood" src="assets/sound/brawo.mp3" preload="auto"></audio>
     <audio id="quizSoundBad" src="assets/sound/lose.mp3" preload="auto"></audio>
+    <div id="gameOverModal" class="gameover-modal">
+      <div class="gameover-modal-content">
+        <h2>Koniec gry!</h2>
+        <div id="leaderboard"></div>
+        <button id="backToMenuBtn" class="menu-btn">Powrót do menu</button>
+      </div>
+    </div>
+    <div id="nameSetupModal" class="gameover-modal active">
+      <div class="gameover-modal-content" style="min-width:unset;">
+        <h2>Wybierz nazwy graczy</h2>
+        <div id="nameSetupList" style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center;"></div>
+        <button id="startGameBtn" class="menu-btn" disabled style="margin-top:24px;">Start gry</button>
+      </div>
+    </div>
     <script src="scripts/utils/math.js"></script>
     <script src="scripts/core/question.js"></script>
     <script src="scripts/core/rendering.js"></script>
@@ -42,6 +56,7 @@
     <script src="scripts/entities/player.js"></script>
     <script src="scripts/rooms/floorGeneration.js"></script>
     <script src="scripts/core/game.js"></script>
+    <script src="scripts/utils/names.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

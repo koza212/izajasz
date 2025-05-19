@@ -116,10 +116,11 @@ class Game {
     if (this.currentPlayer.hp <= 0) {
       this.currentPlayer.finished = true;
     }
-    if (this.currentPlayer.coins >= 3) {
+    if (this.currentPlayer.coins >= 1) {
       this.currentPlayer.finished = true;
     }
-  }
+    this.checkGameOver();
+}
 
   nextTurn() {
     let startIdx = this.currentPlayerIndex;
@@ -201,5 +202,39 @@ class Game {
 
         this.currentPlayer.update();
     }, 1000 / this.FPS);
+  }
+
+  showGameOver() {
+    const winners = this.players.filter(p => p.coins >= 1);
+    const losers = this.players.filter(p => p.hp <= 0);
+
+    winners.sort((a, b) => a.timer - b.timer);
+    losers.sort((a, b) => a.timer - b.timer);
+    let html = '';
+    html += `<div class="leaderboard-section">
+        <div class="leaderboard-section-title">🏆 Zwycięzcy</div>
+        <ul class="leaderboard-list">
+            ${winners.length ? winners.map((p, i) => `
+                <li class="winner">P${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>
+            `).join('') : '<li style="color:#aaa;">Brak</li>'}
+        </ul>
+    </div>`;
+    html += `<div class="leaderboard-section">
+        <div class="leaderboard-section-title">💀 Przegrani</div>
+        <ul class="leaderboard-list">
+            ${losers.length ? losers.map((p, i) => `
+                <li class="loser">${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>
+            `).join('') : '<li style="color:#aaa;">Brak</li>'}
+        </ul>
+    </div>`;
+
+    document.getElementById('leaderboard').innerHTML = html;
+    document.getElementById('gameOverModal').classList.add('active');
+  }
+
+  checkGameOver() {
+    if (this.players.every(p => p.finished)) {
+        this.showGameOver();
+    }
   }
 }
