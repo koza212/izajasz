@@ -1,4 +1,3 @@
-
 function randomName() {
     const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
     const noun = nouns[Math.floor(Math.random() * nouns.length)];
@@ -7,6 +6,7 @@ function randomName() {
 
 function setupNames(playerCount, callback) {
     const modal = document.getElementById('nameSetupModal');
+    document.body.classList.add('namesetup-active');
     const list = document.getElementById('nameSetupList');
     const startBtn = document.getElementById('startGameBtn');
     const names = Array(playerCount).fill("").map(() => randomName());
@@ -15,8 +15,8 @@ function setupNames(playerCount, callback) {
     function render() {
         list.innerHTML = names.map((name, i) => `
             <div class="name-tile${confirmed[i] ? ' confirmed' : ''}">
-                <div style="font-weight:bold; font-size:1.1em; margin-bottom:6px;">Gracz ${i+1}</div>
-                <input type="text" value="${name}" id="nameInput${i}" ${confirmed[i] ? "disabled" : ""}>
+                <div>Gracz ${i+1}</div>
+                <div class="nick-box">${name}</div>
                 <div>
                     <button class="tile-btn" id="randomBtn${i}" ${confirmed[i] ? "disabled" : ""}>Losuj</button>
                     <button class="tile-btn" id="confirmBtn${i}" ${confirmed[i] ? "disabled" : ""}>Zatwierdź</button>
@@ -35,26 +35,15 @@ function setupNames(playerCount, callback) {
                 render();
             }
             if (e.target.id === `confirmBtn${i}`) {
-                const val = document.getElementById(`nameInput${i}`).value.trim();
-                if (val.length > 1) {
-                    names[i] = val;
-                    confirmed[i] = true;
-                    render();
-                }
-            }
-        }
-    };
-    list.oninput = function(e) {
-        for (let i = 0; i < playerCount; i++) {
-            if (e.target.id === `nameInput${i}`) {
-                names[i] = e.target.value;
-                confirmed[i] = false;
+                confirmed[i] = true;
                 render();
             }
         }
     };
+    
     startBtn.onclick = function() {
         modal.classList.remove('active');
+        document.body.classList.remove('namesetup-active'); 
         callback(names);
     };
 }

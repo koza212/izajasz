@@ -145,7 +145,7 @@ const questions = [
     { question: "Który z poniższych języków programowania jest najczęściej używany do tworzenia stron internetowych?",answers: ["HTML", "Python", "C++", "JavaScript"],correctAnswer: 0 },
     { question: "Jak nazywa się system kontroli wersji powszechnie używany przez programistów?", answers: ["Git", "Oracle", "Unix", "Bash"], correctAnswer: 0},
     { question: "Które z poniższych rozszerzeń plików wskazuje na skrypt języka Python?", answers: [".py", ".java", ".html", ".exe"], correctAnswer: 0},
-    { question: "Która struktura danych ma zasadę „ostatni weszł, pierwszy wyszedł” (LIFO)?", answers: ["Stos", "Kolejka", "Tablica", "Graf"], correctAnswer: 0},
+    { question: "Która struktura danych ma zasadę „ostatni wszedł, pierwszy wyszedł” (LIFO)?", answers: ["Kolejka", "Stos", "Tablica", "Graf"], correctAnswer: 0},
     { question: "Która metoda zwraca element ze specyficzną wartością?", answers: ["getElementsById()", "getElementsByClass()", "getElementsByName()", "getElementByTagName()"], correctAnswer: 0},
     { question: "Która funkcja w PHP wykonuje zapytanie do bazy danych SQL?", answers: ["query()", "real_escape_string()", "fetch_array()", "connect()"], correctAnswer: 0},
     { question: "Który z poniższych formatów plików najczęściej służy do zapisywania zdjęć cyfrowych?", answers: [".jpg", ".mp3", ".docx", ".exe"], correctAnswer: 0},

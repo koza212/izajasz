@@ -46,8 +46,18 @@
     <div id="nameSetupModal" class="gameover-modal active">
       <div class="gameover-modal-content" style="min-width:unset;">
         <h2>Wybierz nazwy graczy</h2>
-        <div id="nameSetupList" style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center;"></div>
-        <button id="startGameBtn" class="menu-btn" disabled style="margin-top:24px;">Start gry</button>
+        <div id="nameSetupList">
+          <div class="name-tile">
+            <div>Gracz 1</div>
+            <div class="nick-box">Szybki Lis</div>
+            <div>
+                <button class="tile-btn">Losuj</button>
+                <button class="tile-btn">Zatwierdź</button>
+            </div>
+            <div class="confirmed-label">✔ Zatwierdzono</div>
+          </div>
+        </div>
+        <button id="startGameBtn">Start gry</button>
       </div>
     </div>
     <script src="scripts/core/music.js"></script>

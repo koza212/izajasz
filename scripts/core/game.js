@@ -219,7 +219,7 @@ class Game {
         <div class="leaderboard-section-title">🏆 Zwycięzcy</div>
         <ul class="leaderboard-list">
             ${winners.length ? winners.map((p, i) => `
-                <li class="winner">P${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>
+                <li class="winner">${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>
             `).join('') : '<li style="color:#aaa;">Brak</li>'}
         </ul>
     </div>`;
@@ -234,7 +234,8 @@ class Game {
 
     document.getElementById('leaderboard').innerHTML = html;
     document.getElementById('gameOverModal').classList.add('active');
-  }
+    document.body.classList.add('gameover-active'); 
+}
 
   checkGameOver() {
     if (this.players.every(p => p.finished)) {
