@@ -143,30 +143,6 @@ body {
     transform: scale(1.08);
 }
 
-.action-row {
-    margin-top: 1em;
-    display: flex;
-    justify-content: center;
-}
-
-.action-btn {
-    padding: 0 2em;
-    height: 2.8em;
-    font-size: 1.1em;
-    border: none;
-    border-radius: 1.5em;
-    background: #43a047;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 0.2em 0.8em rgba(67,160,71,0.12);
-    transition: background 0.2s, transform 0.1s;
-}
-
-.action-btn:hover, .action-btn:active {
-    background: #388e3c;
-    transform: scale(1.05);
-}
-
 .map-row {
     margin-top: 1em;
     display: flex;

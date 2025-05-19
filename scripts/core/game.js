@@ -88,8 +88,6 @@ class Game {
     window.addEventListener('mouseup', () => this.heldDirection = null);
     window.addEventListener('touchend', () => this.heldDirection = null);
 
-    document.getElementById('action-btn').onclick = () => this.handleAction();
-
     document.getElementById('map-btn').onclick = () => {
         this.render.MapToggled = !this.render.MapToggled;
     };
@@ -157,11 +155,6 @@ class Game {
         this.currentPlayer.move(1, 0);
         break;
     }
-  }
-
-  handleAction() {
-    if (this.currentPlayer.inQuiz || this.currentPlayer.finished) return;
-    this.currentPlayer.checkForDoors();
   }
   
   start() {
