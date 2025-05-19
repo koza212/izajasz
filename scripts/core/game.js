@@ -16,7 +16,7 @@ class Game {
     var width = height * (16/9);
     var scale = height / 1080;
 
-    this.render = new Renderer(this.map, width, height, scale);
+    this.render = new Renderer(this.map, width, height, scale, this.gen.adjList);
     this.render.render();
 
     this.canvasHeight = this.render.getCanvasHeight();
@@ -25,8 +25,8 @@ class Game {
     this.players = [];
     for (let i = 0; i < 4; i++) {
       this.players.push(new Player(
-        this.canvasWidth / 8 + i * 50, 
-        this.canvasHeight / 8,
+        200,
+        600 +( 170 * i),
         1,
         this.canvasWidth,
         this.canvasHeight,
@@ -108,7 +108,7 @@ class Game {
 
   start() {
     setInterval(() => {
-        this.render.render();
+        this.render.render(this.currentPlayer.posRoom.x, this.currentPlayer.posRoom.y, this.currentPlayer.id);
         this.render.drawPlayerStats(this.players);
 
         let pos = this.currentPlayer.posRoom;

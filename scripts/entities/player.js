@@ -8,6 +8,7 @@ class Position{
 class Player extends Entity {
     constructor(x, y, moveSpeed, canvasWidth, canvasHeight, render, map, scale, adjList) {
         super(x, y);
+        this.y = 450;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.moveSpeed = moveSpeed;
@@ -32,7 +33,6 @@ class Player extends Entity {
         ];
 
         this.id = render.createImage("./assets/images/entities/player.png", this.x, this.y, 150, 150,"player", true, this.animationArr, 0);
-        this.shadowID = render.createImage("./assets/images/entities/shadow.png", this.x, (this.y - 20), 150, 150,"shadow", true);
         this.updateID();
         this.posRenderUpdate(this.realID);
 
@@ -112,6 +112,8 @@ class Player extends Entity {
     posRenderUpdate(id){
         this.render.renderArr[id-1].x = this.x;
         this.render.renderArr[id-1].y = this.y;
+        this.render.renderArr[id-1].roomX = this.posRoom.x;
+        this.render.renderArr[id-1].roomY = this.posRoom.y;
     }
 
     // das volk das sind wir
@@ -135,7 +137,7 @@ class Player extends Entity {
                 this.x = 270;
             }
         }
-        else if(this.y < 160 && (this.x > 850 && this.x < 970)){
+        else if(this.y < 160 && (this.x > 800 && this.x < 920)){
             console.log("top door");
             var key = `${this.posRoom.x-1},${this.posRoom.y}`;
             if(this.adjList.has(key)){
@@ -144,7 +146,7 @@ class Player extends Entity {
                 this.y = 740;
             }
         }
-        else if(this.y > 740 && (this.x > 850 && this.x < 970)){
+        else if(this.y > 740 && (this.x > 800 && this.x < 920)){
             console.log("bottom door");
             var key = `${this.posRoom.x+1},${this.posRoom.y}`;
             if(this.adjList.has(key)){
@@ -154,8 +156,5 @@ class Player extends Entity {
             }
         }
     }
-
-
-
 
 }
