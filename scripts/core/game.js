@@ -116,8 +116,10 @@ class Game {
     if (this.currentPlayer.hp <= 0) {
       this.currentPlayer.finished = true;
     }
-    if (this.currentPlayer.coins >= 1) {
+    if (this.currentPlayer.coins >= 3) {
       this.currentPlayer.finished = true;
+      this.showGameOver(); // End the game immediately if a player wins
+      return; // Prevent further actions after game over
     }
     this.checkGameOver();
 }
@@ -205,17 +207,19 @@ class Game {
   }
 
   showGameOver() {
-    const winners = this.players.filter(p => p.coins >= 1);
-    const losers = this.players.filter(p => p.hp <= 0);
+    // Winners: only players with 3 or more coins
+    const winners = this.players.filter(p => p.coins >= 3);
+    // Losers: all others
+    const losers = this.players.filter(p => p.coins < 3);
 
     winners.sort((a, b) => a.timer - b.timer);
     losers.sort((a, b) => a.timer - b.timer);
     let html = '';
     html += `<div class="leaderboard-section">
-        <div class="leaderboard-section-title">🏆 Zwycięzcy</div>
+        <div class="leaderboard-section-title">🏆 Zwycięzca</div>
         <ul class="leaderboard-list">
             ${winners.length ? winners.map((p, i) => `
-                <li class="winner">P${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>
+                <li class="winner">${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>
             `).join('') : '<li style="color:#aaa;">Brak</li>'}
         </ul>
     </div>`;
@@ -233,8 +237,14 @@ class Game {
   }
 
   checkGameOver() {
+    // End the game if any player has enough coins to win
+    if (this.players.some(p => p.coins >= 3)) {
+      this.showGameOver();
+      return;
+    }
+    // Or if all players are finished (e.g., dead)
     if (this.players.every(p => p.finished)) {
-        this.showGameOver();
+      this.showGameOver();
     }
   }
 }
