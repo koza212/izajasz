@@ -282,7 +282,7 @@ class Renderer{
 
         statsDiv.innerHTML = players.map((player, idx) => `
             <div class="player-stats-row" style="opacity:${player.finished ? 0.5 : 1}">
-                <span class="player-label">P${idx+1}</span>
+                <span class="player-label">${player.name || `P${idx+1}`}</span>
                 <img class="stat-icon heart" src="${hpIcon}" alt="HP">
                 <span class="stat-value">${player.hp}</span>
                 <img class="stat-icon" src="${coinIcon}" alt="Coins">
