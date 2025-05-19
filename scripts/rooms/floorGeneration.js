@@ -51,6 +51,7 @@ class FloorGenerator {
         if(roomsPlaced < this.roomCount) return this.generateFloorMap(startX, startY);
 
         this.adjList = this.findAdjacencyList();
+        this.randRooms = this.generateCoordIntMapWithRandom();
         let farthestBossRoom = null;
         let maxDistance = 0;
 
@@ -76,6 +77,15 @@ class FloorGenerator {
         }
         console.log("Regenerating map");
         return this.generateFloorMap(this.startX, this.startY);
+    }
+
+    generateCoordIntMapWithRandom() {
+        let coordIntMap = new Map();
+        for (let key of this.adjList.keys()) {
+            let value = Math.floor(this.rng.next() * 2);
+            coordIntMap.set(key, value);
+        }
+        return coordIntMap;
     }
 
     fillSpecialRooms() {

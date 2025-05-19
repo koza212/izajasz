@@ -1,9 +1,10 @@
 class Renderer{
-    constructor(map,width, height, scale, adjList){
+    constructor(map,width, height, scale, adjList, randRooms){
         this.height = height;
         this.width = width;
         this.scale = scale;
         this.adjList = adjList;
+        this.randRooms = randRooms;
         this.canvas = document.getElementById("game");
         this.ctx = this.canvas.getContext("2d");
         this.canvas.width = this.width;
@@ -29,11 +30,12 @@ class Renderer{
 
         this.finished = false;
 
-        this.interfaceSprites = 6;
+        this.interfaceSprites = 7;
 
         this.render = this.render.bind(this); // binding so in render it doesnt lose context
 
         this.createImage("./assets/images/map/background.png");
+        this.createImage("./assets/images/map/background2.png");
         this.createImage("./assets/images/minimap/bigMapBackground.png");
         this.createImage("./assets/images/map/doors/top.png");
         this.createImage("./assets/images/map/doors/left.png");
@@ -167,9 +169,18 @@ class Renderer{
 
     render(currentRoomX, currentRoomY, currentID){
         this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height); // cleaning the canvas
-        this.ctx.drawImage(this.renderArr[0].image, 0, 0, this.width, this.height); // drawing the background
 
         var key = `${currentRoomX},${currentRoomY}`;
+
+        if(this.randRooms.has(key)){
+            if(this.randRooms.get(key) == 1){
+                this.ctx.drawImage(this.renderArr[0].image, 0, 0, this.width, this.height); // drawing the background
+            }
+            else{
+                this.ctx.drawImage(this.renderArr[1].image, 0, 0, this.width, this.height); // drawing the background
+            }
+
+        }
 
         if(this.adjList.has(key)){
             var arr = this.adjList.get(key);
@@ -177,16 +188,16 @@ class Renderer{
             arr.forEach(element => {
                 var coords = element.split(",");
                 if(coords[0] == currentRoomX && coords[1] < currentRoomY){
-                    this.ctx.drawImage(this.renderArr[3].image, 50, 350, 140, 250);
+                    this.ctx.drawImage(this.renderArr[4].image, 50, 350, 140, 250);
                 }
                 if(coords[0] == currentRoomX && coords[1] > currentRoomY){
-                    this.ctx.drawImage(this.renderArr[4].image, 1530, 350, 140, 250);
+                    this.ctx.drawImage(this.renderArr[5].image, 1530, 350, 140, 250);
                 }
                 if(coords[0] > currentRoomX && coords[1] == currentRoomY){
-                    this.ctx.drawImage(this.renderArr[5].image, 700, 805, 250, 107);
+                    this.ctx.drawImage(this.renderArr[6].image, 700, 805, 250, 107);
                 }
                 if(coords[0] < currentRoomX && coords[1] == currentRoomY){
-                    this.ctx.drawImage(this.renderArr[2].image, 700, 50, 250, 120);
+                    this.ctx.drawImage(this.renderArr[3].image, 700, 50, 250, 120);
                 }
             });
         }
@@ -256,7 +267,7 @@ class Renderer{
             }
         }
         else{
-            this.ctx.drawImage(this.renderArr[1].image, 0, 0, this.width, this.height);
+            this.ctx.drawImage(this.renderArr[2].image, 0, 0, this.width, this.height);
             this.shouldGenMap(currentRoomX, currentRoomY);
             for(var i = this.interfaceSprites; i < this.renderArr.length; i++){
                 if(!this.renderArr[i].constans){
