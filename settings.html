@@ -27,5 +27,15 @@
         </section>
     </div>
 
+    <script>
+        if (!localStorage.getItem('playerCount')) {
+            localStorage.setItem('playerCount', document.getElementById('player-count').value);
+        }
+        document.getElementById('player-count').value = localStorage.getItem('playerCount') || "2";
+        document.getElementById('player-count').addEventListener('change', function() {
+            localStorage.setItem('playerCount', this.value);
+        });
+    </script>
+
 </body>
 </html>
