@@ -64,16 +64,12 @@ class Renderer{
         const ctx = this.ctx;
         const img = this.coinImg || (this.coinImg = new Image());
         if (!img.src) img.src = "assets/images/zeton.png";
-
-        const coinSize = 80 * scale; // Adjust size as needed
-        const drawX = this.canvas.width / 2 - coinSize / 2;
-        const drawY = this.canvas.height / 2 - coinSize / 2;
-
+        const coinSize = 80 * scale;
         if (img.complete) {
-            ctx.drawImage(img, drawX, drawY, coinSize, coinSize);
+            ctx.drawImage(img, x - coinSize/2, y - coinSize/2, coinSize, coinSize);
         } else {
             img.onload = () => {
-                ctx.drawImage(img, drawX, drawY, coinSize, coinSize);
+                ctx.drawImage(img, x - coinSize/2, y - coinSize/2, coinSize, coinSize);
             };
         }
     }
@@ -268,11 +264,10 @@ class Renderer{
                     this.ctx.drawImage(this.renderArr[i].image, this.renderArr[i].x * this.scale, this.renderArr[i].y * this.scale, this.renderArr[i].w * this.scale, this.renderArr[i].h * this.scale);
                 }
             }
-            // tutaj bedzie duza mapa ale teraz mi sie nie chce jej dodac ;)
         }
     }
 
-    drawPlayerStats(players) {
+    drawPlayerStats(players, currentPlayerIndex) {
         const statsDiv = document.getElementById('player-stats');
         if (!statsDiv) return;
 
@@ -281,7 +276,7 @@ class Renderer{
         const timerIcon = 'assets/images/clock.png'; 
 
         statsDiv.innerHTML = players.map((player, idx) => `
-            <div class="player-stats-row" style="opacity:${player.finished ? 0.5 : 1}">
+            <div class="player-stats-row${idx === currentPlayerIndex ? ' active-player' : ''}" style="opacity:${player.finished ? 0.5 : 1}">
                 <span class="player-label">${player.name || `P${idx+1}`}</span>
                 <img class="stat-icon heart" src="${hpIcon}" alt="HP">
                 <span class="stat-value">${player.hp}</span>

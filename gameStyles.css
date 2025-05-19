@@ -170,6 +170,12 @@ body{
     border-bottom: none;
 }
 
+.player-stats-row.active-player {
+    background: linear-gradient(90deg, #43e97b22 0%, #38f9d722 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px #43e97b;
+}
+
 .player-label {
     font-weight: bold;
     min-width: 56px;

@@ -45,7 +45,11 @@ class Game {
     for (let x = 0; x < this.map.length; x++) {
       for (let y = 0; y < this.map[x].length; y++) {
         if (this.map[x][y] !== '-' && this.map[x][y] !== "Start") {
-          this.roomCoins[`${x},${y}`] = true;
+          const marginX = this.canvasWidth * 0.25;
+          const marginY = this.canvasHeight * 0.25;
+          const coinX = Math.random() * (this.canvasWidth - 2 * marginX) + marginX;
+          const coinY = Math.random() * (this.canvasHeight - 2 * marginY) + marginY;
+          this.roomCoins[`${x},${y}`] = { active: true, x: coinX, y: coinY };
         }
       }
     }
@@ -165,7 +169,7 @@ class Game {
   start() {
     setInterval(() => {
         this.render.render(this.currentPlayer.posRoom.x, this.currentPlayer.posRoom.y, this.currentPlayer.id);
-        this.render.drawPlayerStats(this.players);
+        this.render.drawPlayerStats(this.players, this.currentPlayerIndex);
 
         if (!this.currentPlayer.finished) {
           if(!this.currentPlayer.inQuiz){
@@ -179,18 +183,18 @@ class Game {
         let pos = this.currentPlayer.posRoom;
         let key = `${pos.x},${pos.y}`;
 
-        if (this.roomCoins[key]) {
-            this.render.drawCoin(pos.x, pos.y, this.render.scale);
+        const coinData = this.roomCoins[key];
+        if (coinData && coinData.active) {
+            this.render.drawCoin(coinData.x, coinData.y, this.render.scale);
 
             const playerX = this.currentPlayer.x;
             const playerY = this.currentPlayer.y;
 
-            const roomCenterX = this.canvasWidth / 2;
-            const roomCenterY = this.canvasHeight / 2;
-            const coinRadius = 40 * this.render.scale;
-            
-            const dx = playerX - roomCenterX;
-            const dy = playerY - roomCenterY;
+  
+            const coinRadius = 60 * this.render.scale; 
+
+            const dx = playerX - coinData.x;
+            const dy = playerY - coinData.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (
@@ -207,9 +211,7 @@ class Game {
   }
 
   showGameOver() {
-    // Winners: only players with 3 or more coins
     const winners = this.players.filter(p => p.coins >= 3);
-    // Losers: all others
     const losers = this.players.filter(p => p.coins < 3);
 
     winners.sort((a, b) => a.timer - b.timer);

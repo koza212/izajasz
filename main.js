@@ -63,6 +63,7 @@ window.onload = function() {
     const playerCount = parseInt(localStorage.getItem('playerCount'), 10) || 4;
     setupNames(playerCount, function(playerNames) {
         var game = new Game();
+
         for (let i = 0; i < playerNames.length; i++) {
             if (game.players[i]) game.players[i].name = playerNames[i];
         }
