@@ -189,7 +189,7 @@ class Game {
             const playerY = this.currentPlayer.y;
 
   
-            const coinRadius = 60 * this.render.scale; 
+            const coinRadius = 100 * this.render.scale; // Increased from 60 to 100
 
             const dx = playerX - coinData.x;
             const dy = playerY - coinData.y;
@@ -216,7 +216,7 @@ class Game {
     losers.sort((a, b) => a.timer - b.timer);
     let html = '';
     html += `<div class="leaderboard-section">
-        <div class="leaderboard-section-title">🏆 Zwycięzca</div>
+        <div class="leaderboard-section-title">🏆 Zwycięzcy</div>
         <ul class="leaderboard-list">
             ${winners.length ? winners.map((p, i) => `
                 <li class="winner">${p.name || `P${this.players.indexOf(p)+1}`} <span>⏱️ ${p.timer.toFixed(1)}s</span></li>

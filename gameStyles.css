@@ -113,6 +113,14 @@ body {
     width: 90vw;
     max-width: 500px;
 }
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
 .arrow-row {
     display: flex;
@@ -526,5 +534,21 @@ body.gameover-active .player-stats {
 #startGameBtn:hover:not(:disabled), #startGameBtn:active:not(:disabled) {
     background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
     transform: scale(1.04);
+}
+
+#quizModal {
+    z-index: 1201 !important;
+    position: fixed;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+}
+
+.gameover-modal {
+    z-index: 1200 !important;
+}
+.player-stats .active-player {
+  font-weight: bold;
+  background: rgba(100, 100, 150, 0.92);
+  border-radius: 0.3em;
+  padding: 0.2em 0.5em;
 }
 
