@@ -50,18 +50,41 @@ class Game {
       }
     }
 
-    this.questions = prepareQuestions([
-      {
-        question: "What is 2+2?",
-        answers: ["3", "4", "5", "6"],
-        correctAnswer: 1
-      },
-      {
-        question: "What is the capital of France?",
-        answers: ["Berlin", "London", "Paris", "Rome"],
-        correctAnswer: 2
-      },
-    ]);
+    this.questions = prepareQuestions(questions);
+
+    this.heldDirection = null;
+
+    const setDirection = dir => {
+      this.heldDirection = dir;
+    };
+    const clearDirection = dir => {
+      if (this.heldDirection === dir) this.heldDirection = null;
+    };
+
+    document.getElementById('move-up').onmousedown = () => setDirection('up');
+    document.getElementById('move-down').onmousedown = () => setDirection('down');
+    document.getElementById('move-left').onmousedown = () => setDirection('left');
+    document.getElementById('move-right').onmousedown = () => setDirection('right');
+
+    document.getElementById('move-up').onmouseup = () => clearDirection('up');
+    document.getElementById('move-down').onmouseup = () => clearDirection('down');
+    document.getElementById('move-left').onmouseup = () => clearDirection('left');
+    document.getElementById('move-right').onmouseup = () => clearDirection('right');
+
+    document.getElementById('move-up').ontouchstart = e => { e.preventDefault(); setDirection('up'); };
+    document.getElementById('move-down').ontouchstart = e => { e.preventDefault(); setDirection('down'); };
+    document.getElementById('move-left').ontouchstart = e => { e.preventDefault(); setDirection('left'); };
+    document.getElementById('move-right').ontouchstart = e => { e.preventDefault(); setDirection('right'); };
+
+    document.getElementById('move-up').ontouchend = () => clearDirection('up');
+    document.getElementById('move-down').ontouchend = () => clearDirection('down');
+    document.getElementById('move-left').ontouchend = () => clearDirection('left');
+    document.getElementById('move-right').ontouchend = () => clearDirection('right');
+
+    window.addEventListener('mouseup', () => this.heldDirection = null);
+    window.addEventListener('touchend', () => this.heldDirection = null);
+
+    document.getElementById('action-btn').onclick = () => this.handleAction();
   }
 
   get currentPlayer() {
@@ -78,7 +101,7 @@ class Game {
       } else {
         this.currentPlayer.takeDamage();
       }
-      this.roomCoins[key] = false; // Remove coin after answering
+      this.roomCoins[key] = false; 
       this.currentPlayer.inQuiz = false;
       this.checkPlayerEnd();
       this.nextTurn();
@@ -106,10 +129,39 @@ class Game {
     this.keyGetter.player = this.players[this.currentPlayerIndex];
   }
 
+  handleMove(direction) {
+    if (this.currentPlayer.inQuiz || this.currentPlayer.finished) return;
+    switch (direction) {
+      case 'up':
+        this.currentPlayer.move(0, -1);
+        break;
+      case 'down':
+        this.currentPlayer.move(0, 1);
+        break;
+      case 'left':
+        this.currentPlayer.move(-1, 0);
+        break;
+      case 'right':
+        this.currentPlayer.move(1, 0);
+        break;
+    }
+  }
+
+  handleAction() {
+    if (this.currentPlayer.inQuiz || this.currentPlayer.finished) return;
+    this.currentPlayer.checkForDoors();
+  }
+  
   start() {
     setInterval(() => {
         this.render.render();
         this.render.drawPlayerStats(this.players);
+
+        if (!this.currentPlayer.inQuiz && !this.currentPlayer.finished) {
+            this.currentPlayer.move(this.heldDirection);
+        } else {
+            this.currentPlayer.move(null); 
+        }
 
         let pos = this.currentPlayer.posRoom;
         let key = `${pos.x},${pos.y}`;
@@ -138,7 +190,6 @@ class Game {
         }
 
         this.currentPlayer.update();
-
     }, 1000 / this.FPS);
   }
 }

@@ -43,35 +43,31 @@ class Player extends Entity {
         this.speed = 1;
     }
 
-    move(dir) {
-        if(dir == 1){
-            if(this.speedX < 10){
-                this.speedX = (this.speedX + 2);
-                this.render.renderArr[this.realID-1].currentState = 4;
-            }
+    move(direction) {
+        // Reset speeds before applying new direction
+        this.speedX = 0;
+        this.speedY = 0;
 
-        }
-        else if(dir == 2){
-            if(this.speedY > (-10)){
-                this.speedY = (this.speedY - 2);
-                if( this.speedX == 0){
-                    this.render.renderArr[this.realID-1].currentState = 2;
-                }
-            }
-        }
-        else if(dir == 3){
-            if(this.speedX > (-10)){
-                this.speedX = (this.speedX - 2);
-                this.render.renderArr[this.realID-1].currentState = 3;  
-            }
-        }
-        else if(dir == 4){
-            if(this.speedY < 10){
-                this.speedY = (this.speedY + 2);
-                if( this.speedX == 0){
-                    this.render.renderArr[this.realID-1].currentState = 1;
-                }
-            }
+        switch (direction) {
+            case 'right':
+                this.speedX = 6;
+                this.render.renderArr[this.realID-1].currentState = 4;
+                break;
+            case 'left':
+                this.speedX = -6;
+                this.render.renderArr[this.realID-1].currentState = 3;
+                break;
+            case 'up':
+                this.speedY = -6;
+                this.render.renderArr[this.realID-1].currentState = 2;
+                break;
+            case 'down':
+                this.speedY = 6;
+                this.render.renderArr[this.realID-1].currentState = 1;
+                break;
+            default:
+                // No movement
+                this.render.renderArr[this.realID-1].currentState = 0;
         }
         this.posRenderUpdate(this.realID);
     }
@@ -154,8 +150,4 @@ class Player extends Entity {
             }
         }
     }
-
-
-
-
 }
