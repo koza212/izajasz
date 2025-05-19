@@ -40,7 +40,6 @@ class Player extends Entity {
 
         this.hp = 3; 
         this.coins = 0;
-        this.speed = 1;
 
         this.timer = 0; 
     }
@@ -48,23 +47,22 @@ class Player extends Entity {
     move(direction) {
         switch (direction) {
             case 'right':
-                this.speedX = 6;
+                this.speedX = 8;
                 this.render.renderArr[this.realID-1].currentState = 4;
                 break;
             case 'left':
-                this.speedX = -6;
+                this.speedX = -8;
                 this.render.renderArr[this.realID-1].currentState = 3;
                 break;
             case 'up':
-                this.speedY = -6;
+                this.speedY = -8;
                 this.render.renderArr[this.realID-1].currentState = 2;
                 break;
             case 'down':
-                this.speedY = 6;
+                this.speedY = 8;
                 this.render.renderArr[this.realID-1].currentState = 1;
                 break;
             default:
-                // No movement
                 this.render.renderArr[this.realID-1].currentState = 0;
         }
         this.posRenderUpdate(this.realID);
