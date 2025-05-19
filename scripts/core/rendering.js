@@ -273,21 +273,22 @@ class Renderer{
     }
 
     drawPlayerStats(players) {
-        // Use HTML for stats for better styling
         const statsDiv = document.getElementById('player-stats');
         if (!statsDiv) return;
 
-        // Paths to your icons
         const coinIcon = 'assets/images/zeton.png';
         const hpIcon = 'assets/images/heart.png';
+        const timerIcon = 'assets/images/clock.png'; 
 
         statsDiv.innerHTML = players.map((player, idx) => `
             <div class="player-stats-row" style="opacity:${player.finished ? 0.5 : 1}">
                 <span class="player-label">P${idx+1}</span>
-                <img class="stat-icon" src="${hpIcon}" alt="HP">
+                <img class="stat-icon heart" src="${hpIcon}" alt="HP">
                 <span class="stat-value">${player.hp}</span>
                 <img class="stat-icon" src="${coinIcon}" alt="Coins">
                 <span class="stat-value">${player.coins}</span>
+                <img class="stat-icon" src="${timerIcon}" alt="Timer">
+                <span class="stat-value">${player.timer.toFixed(1)}s</span>
             </div>
         `).join('');
     }

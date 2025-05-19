@@ -5,7 +5,7 @@ class FloorGenerator {
         }
         this.floorNumber = floorNumber;
         this.rng = rng;
-        this.roomCount = Math.min(Math.floor(3.33 * floorNumber + Math.round(rng.next() + 5)), 20);
+        this.roomCount = 20;
     }
 
     generateFloorMap(startX = 6, startY = 6) {
@@ -37,7 +37,7 @@ class FloorGenerator {
                 let neighborCount = 0;
                 for(const [dirX, dirY] of directions){
                     let neighborX = dirX + newX, neighborY = dirY + newY;
-                    if((neighborX < 0 || neighborX > this.gridSize) || (neighborY < 0 || neighborY > this.gridSize)) continue;
+                    if((neighborX < 0 || neighborX >= this.gridSize) || (neighborY < 0 || neighborY >= this.gridSize)) continue;
                     if(this.grid[neighborX][neighborY] != '-') neighborCount += 1;
                 }
                 if (neighborCount <= 1 && this.rng.next() < 0.5) {

@@ -164,8 +164,11 @@ class Game {
         this.render.render(this.currentPlayer.posRoom.x, this.currentPlayer.posRoom.y, this.currentPlayer.id);
         this.render.drawPlayerStats(this.players);
 
-        if (!this.currentPlayer.inQuiz && !this.currentPlayer.finished) {
+        if (!this.currentPlayer.finished) {
+          if(!this.currentPlayer.inQuiz){
             this.currentPlayer.move(this.heldDirection);
+          }
+          this.currentPlayer.timer += 1 / this.FPS; 
         } else {
             this.currentPlayer.move(null); 
         }

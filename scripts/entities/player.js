@@ -41,6 +41,8 @@ class Player extends Entity {
         this.hp = 3; 
         this.coins = 0;
         this.speed = 1;
+
+        this.timer = 0; 
     }
 
     move(direction) {
@@ -153,8 +155,4 @@ class Player extends Entity {
             window.game.currentRoomY = this.posRoom.y;
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 22561129e9f42bf95c4a4ac47de7f868da64cd9e
 }
