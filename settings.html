@@ -22,6 +22,14 @@
             </select>
         </section>
 
+        <section class="settings-section">
+            <label for="bgMusicSelect">Select background music:</label>
+            <select id="bgMusicSelect" class="select-dropdown">
+              <option value="background1.m4a">Track 1</option>
+              <option value="background2.m4a">Track 2</option>
+            </select>
+        </section>
+
         <section class="buttons">
             <section id="back" class="btn" onclick="window.location.href='index.html'">Back</section>
         </section>
@@ -34,6 +42,13 @@
         document.getElementById('player-count').value = localStorage.getItem('playerCount') || "2";
         document.getElementById('player-count').addEventListener('change', function() {
             localStorage.setItem('playerCount', this.value);
+        });
+
+        const select = document.getElementById('bgMusicSelect');
+        const saved = localStorage.getItem('bgMusic') || 'background1.m4a';
+        select.value = saved;
+        select.addEventListener('change', () => {
+          localStorage.setItem('bgMusic', select.value);
         });
     </script>
 
