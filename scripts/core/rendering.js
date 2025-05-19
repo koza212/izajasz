@@ -56,17 +56,20 @@ class Renderer{
     
     drawCoin(x, y, scale) {
         const ctx = this.ctx;
-        ctx.save();
-        ctx.fillStyle = "gold";
-        ctx.beginPath();
-        ctx.arc(
-            this.canvas.width / 2,
-            this.canvas.height / 2,
-            40 * scale, 
-            0, 2 * Math.PI
-        );
-        ctx.fill();
-        ctx.restore();
+        const img = this.coinImg || (this.coinImg = new Image());
+        if (!img.src) img.src = "assets/images/zeton.png";
+
+        const coinSize = 80 * scale; // Adjust size as needed
+        const drawX = this.canvas.width / 2 - coinSize / 2;
+        const drawY = this.canvas.height / 2 - coinSize / 2;
+
+        if (img.complete) {
+            ctx.drawImage(img, drawX, drawY, coinSize, coinSize);
+        } else {
+            img.onload = () => {
+                ctx.drawImage(img, drawX, drawY, coinSize, coinSize);
+            };
+        }
     }
 
     CreateMapImages(){
@@ -214,21 +217,23 @@ class Renderer{
     }
 
     drawPlayerStats(players) {
-        const ctx = this.ctx;
-        ctx.save();
-        ctx.font = "20px Arial";
-        ctx.textAlign = "right";
-        ctx.textBaseline = "top";
-        let x = this.canvas.width - 20;
-        let y = 20;
-        players.forEach((player, idx) => {
-            ctx.fillStyle = player.finished ? "#888" : "#222";
-            ctx.fillText(
-                `P${idx+1}: HP ${player.hp} | Coins ${player.coins}`,
-                x, y + idx * 28
-            );
-        });
-        ctx.restore();
+        // Use HTML for stats for better styling
+        const statsDiv = document.getElementById('player-stats');
+        if (!statsDiv) return;
+
+        // Paths to your icons
+        const coinIcon = 'assets/images/zeton.png';
+        const hpIcon = 'assets/images/heart.png';
+
+        statsDiv.innerHTML = players.map((player, idx) => `
+            <div class="player-stats-row" style="opacity:${player.finished ? 0.5 : 1}">
+                <span class="player-label">P${idx+1}</span>
+                <img class="stat-icon" src="${hpIcon}" alt="HP">
+                <span class="stat-value">${player.hp}</span>
+                <img class="stat-icon" src="${coinIcon}" alt="Coins">
+                <span class="stat-value">${player.coins}</span>
+            </div>
+        `).join('');
     }
 
     getCanvasWidth(){

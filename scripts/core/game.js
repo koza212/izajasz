@@ -22,8 +22,11 @@ class Game {
     this.canvasHeight = this.render.getCanvasHeight();
     this.canvasWidth = this.render.getCanvasWidth();
 
+    let playerCount = parseInt(localStorage.getItem('playerCount'), 10);
+    if (![2, 3, 4].includes(playerCount)) playerCount = 4;
+
     this.players = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < playerCount; i++) {
       this.players.push(new Player(
         this.canvasWidth / 8 + i * 50, 
         this.canvasHeight / 8,
@@ -37,9 +40,6 @@ class Game {
       ));
     }
     this.currentPlayerIndex = 0;
-
-    this.keyGetter = new KeyGetter(this.render, this.players[this.currentPlayerIndex]);
-    window.addEventListener("keydown", this.keyGetter.keyPress);
 
     this.roomCoins = {}; 
     for (let x = 0; x < this.map.length; x++) {
@@ -85,6 +85,10 @@ class Game {
     window.addEventListener('touchend', () => this.heldDirection = null);
 
     document.getElementById('action-btn').onclick = () => this.handleAction();
+
+    document.getElementById('map-btn').onclick = () => {
+        this.render.MapToggled = !this.render.MapToggled;
+    };
   }
 
   get currentPlayer() {
@@ -125,6 +129,9 @@ class Game {
         break;
       }
     } while (this.currentPlayerIndex !== startIdx);
+
+    this.currentRoomX = this.currentPlayer.posRoom.x;
+    this.currentRoomY = this.currentPlayer.posRoom.y;
 
     this.keyGetter.player = this.players[this.currentPlayerIndex];
   }

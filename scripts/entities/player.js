@@ -44,10 +44,6 @@ class Player extends Entity {
     }
 
     move(direction) {
-        // Reset speeds before applying new direction
-        this.speedX = 0;
-        this.speedY = 0;
-
         switch (direction) {
             case 'right':
                 this.speedX = 6;
@@ -148,6 +144,11 @@ class Player extends Entity {
                 console.log("succesfully used bottom door");
                 this.y = 170;
             }
+        }
+
+        if (typeof window.game !== "undefined") {
+            window.game.currentRoomX = this.posRoom.x;
+            window.game.currentRoomY = this.posRoom.y;
         }
     }
 }
