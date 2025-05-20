@@ -141,6 +141,12 @@ class Game {
 
   handleMove(direction) {
     if (this.currentPlayer.inQuiz || this.currentPlayer.finished) return;
+    // Play walking sound
+    const walkSound = document.getElementById('walkSound');
+    if (walkSound) {
+      walkSound.currentTime = 0;
+      walkSound.play();
+    }
     switch (direction) {
       case 'up':
         this.currentPlayer.move(0, -1);
