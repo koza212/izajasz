@@ -68,10 +68,10 @@ class Renderer{
         if (!img.src) img.src = "assets/images/zeton.png";
         const coinSize = 80 * scale;
         if (img.complete) {
-            ctx.drawImage(img, x - coinSize/2, y - coinSize/2, coinSize, coinSize);
+            ctx.drawImage(img, (x - coinSize/2) * this.scale, (y - coinSize/2) * this.scale, coinSize, coinSize);
         } else {
             img.onload = () => {
-                ctx.drawImage(img, x - coinSize/2, y - coinSize/2, coinSize, coinSize);
+                ctx.drawImage(img, (x - coinSize/2) * this.scale, (y - coinSize/2) * this.scale, coinSize, coinSize);
             };
         }
     }
@@ -188,16 +188,16 @@ class Renderer{
             arr.forEach(element => {
                 var coords = element.split(",");
                 if(coords[0] == currentRoomX && coords[1] < currentRoomY){
-                    this.ctx.drawImage(this.renderArr[4].image, 50, 350, 140, 250);
+                    this.ctx.drawImage(this.renderArr[4].image, 50 * this.scale, 400 * this.scale, 140 * this.scale, 250 * this.scale);
                 }
                 if(coords[0] == currentRoomX && coords[1] > currentRoomY){
-                    this.ctx.drawImage(this.renderArr[5].image, 1530, 350, 140, 250);
+                    this.ctx.drawImage(this.renderArr[5].image, 1725 * this.scale, 400 * this.scale, 140 * this.scale, 250 * this.scale);
                 }
                 if(coords[0] > currentRoomX && coords[1] == currentRoomY){
-                    this.ctx.drawImage(this.renderArr[6].image, 700, 805, 250, 107);
+                    this.ctx.drawImage(this.renderArr[6].image, 835 * this.scale, 910 * this.scale, 250 * this.scale, 107 * this.scale);
                 }
                 if(coords[0] < currentRoomX && coords[1] == currentRoomY){
-                    this.ctx.drawImage(this.renderArr[3].image, 700, 50, 250, 120);
+                    this.ctx.drawImage(this.renderArr[3].image, 835 * this.scale, 50 * this.scale, 250 * this.scale, 120 * this.scale);
                 }
             });
         }
